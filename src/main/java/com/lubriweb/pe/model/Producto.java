@@ -1,32 +1,50 @@
 package com.lubriweb.pe.model;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "productos")
-public class Producto {
+@Table(name = "producto")
+public class Producto implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idProducto;
+	@Column
 	private String nombre;
+	@Column
 	private String descripcion;
+	@Column
 	private String imagen;
+	@Column
 	private double precio;
+	@Column
 	private int cantidad;
 	
-	@ManyToOne
-	private Usuario usuario;
+	//Muchos Usuarios un Producto
+	@JoinColumn(name = "IdUsuario", referencedColumnName = "idUsuario")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+	private Usuario usuarios;
 	
-	@ManyToOne
+	//Muchos Productos una Marca
+	@JoinColumn(name = "IdMarca", referencedColumnName = "idMarca")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
 	private Marca marcas;
 	
-	@ManyToOne
+	//Muchos Productos una Categoria
+	@JoinColumn(name = "IdCategoria", referencedColumnName = "idCategoria")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
 	private Categoria categorias;
 	
 	
@@ -35,19 +53,18 @@ public class Producto {
 		
 	}
 
-    
 
 
 	public Producto(Integer idProducto, String nombre, String descripcion, String imagen, double precio, int cantidad,
-			Usuario usuario, Marca marcas, Categoria categorias) {
-		super();
+			Usuario usuarios, Marca marcas, Categoria categorias) {
+		
 		this.idProducto = idProducto;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.imagen = imagen;
 		this.precio = precio;
 		this.cantidad = cantidad;
-		this.usuario = usuario;
+		this.usuarios = usuarios;
 		this.marcas = marcas;
 		this.categorias = categorias;
 	}
@@ -66,10 +83,10 @@ public class Producto {
 
 
 
-
 	public String getNombre() {
 		return nombre;
 	}
+
 
 
 	public void setNombre(String nombre) {
@@ -77,9 +94,11 @@ public class Producto {
 	}
 
 
+
 	public String getDescripcion() {
 		return descripcion;
 	}
+
 
 
 	public void setDescripcion(String descripcion) {
@@ -87,9 +106,11 @@ public class Producto {
 	}
 
 
+
 	public String getImagen() {
 		return imagen;
 	}
+
 
 
 	public void setImagen(String imagen) {
@@ -97,9 +118,11 @@ public class Producto {
 	}
 
 
+
 	public double getPrecio() {
 		return precio;
 	}
+
 
 
 	public void setPrecio(double precio) {
@@ -107,29 +130,30 @@ public class Producto {
 	}
 
 
+
 	public int getCantidad() {
 		return cantidad;
 	}
 
 
+
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
-	
-	
 
-	public Usuario getUsuario() {
-		return usuario;
+
+
+	public Usuario getUsuarios() {
+		return usuarios;
 	}
 
 
 
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUsuarios(Usuario usuarios) {
+		this.usuarios = usuarios;
 	}
 
-	
+
 
 	public Marca getMarcas() {
 		return marcas;
@@ -143,11 +167,9 @@ public class Producto {
 
 
 
-
 	public Categoria getCategorias() {
 		return categorias;
 	}
-
 
 
 
@@ -155,22 +177,10 @@ public class Producto {
 		this.categorias = categorias;
 	}
 
-
-
-
-	@Override
-	public String toString() {
-		return "Producto [idProducto=" + idProducto + ", nombre=" + nombre + ", descripcion=" + descripcion
-				+ ", imagen=" + imagen + ", precio=" + precio + ", cantidad=" + cantidad + ", usuario=" + usuario
-				+ ", marcas=" + marcas + ", categorias=" + categorias + "]";
-	}
-
-
-
-
-
-
+	
+	
+    
 
 	
-
+	
 }

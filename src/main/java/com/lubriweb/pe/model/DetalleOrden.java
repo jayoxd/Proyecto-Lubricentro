@@ -1,30 +1,44 @@
 package com.lubriweb.pe.model;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "detalles")
-public class DetalleOrden {
+@Table(name = "detalle")
+public class DetalleOrden implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@Column
 	private String nombre;
+	@Column
 	private double cantidad;
+	@Column
 	private double precio;
+	@Column
 	private double total;
+	
 	
 	@OneToOne	
 	private Orden orden;
 	
-	@OneToOne
-	private Producto producto;
+	//Muchos Productos en un Detalle de Orden
+	@JoinColumn(name = "IdProducto", referencedColumnName = "idProducto")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+	private Producto productos;
 	
 	
 	public DetalleOrden() {
@@ -32,13 +46,16 @@ public class DetalleOrden {
 	}
 
 
-	public DetalleOrden(Integer id, String nombre, double cantidad, double precio, double total) {
+	public DetalleOrden(Integer id, String nombre, double cantidad, double precio, double total, Orden orden,
+			Producto productos) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.cantidad = cantidad;
 		this.precio = precio;
 		this.total = total;
+		this.orden = orden;
+		this.productos = productos;
 	}
 
 
@@ -90,8 +107,6 @@ public class DetalleOrden {
 	public void setTotal(double total) {
 		this.total = total;
 	}
-	
-	
 
 
 	public Orden getOrden() {
@@ -104,21 +119,18 @@ public class DetalleOrden {
 	}
 
 
-	public Producto getProducto() {
-		return producto;
+	public Producto getProductos() {
+		return productos;
 	}
 
 
-	public void setProducto(Producto producto) {
-		this.producto = producto;
+	public void setProductos(Producto productos) {
+		this.productos = productos;
 	}
+	
+	
 
 
-	@Override
-	public String toString() {
-		return "DetalleOrden [id=" + id + ", nombre=" + nombre + ", cantidad=" + cantidad + ", precio=" + precio
-				+ ", total=" + total + "]";
-	}
 	
 	
 

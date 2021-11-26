@@ -1,8 +1,12 @@
 package com.lubriweb.pe.model;
 
+import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,15 +16,20 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "marca")
-public class Marca {
+public class Marca implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idMarca;
+	@Column
 	private String nombre;
+	@Column
 	private String proveedor;
 	
-	@OneToMany(mappedBy = "marcas")
+	//Una Marca Muchos Productos
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "marcas", fetch = FetchType.LAZY)
 	private List<Producto> productos;
 	
 	
@@ -31,14 +40,13 @@ public class Marca {
 
 
 
-
-	public Marca(Integer idMarca, String nombre, String proveedor) {
+	public Marca(Integer idMarca, String nombre, String proveedor, List<Producto> productos) {
 		super();
 		this.idMarca = idMarca;
 		this.nombre = nombre;
 		this.proveedor = proveedor;
+		this.productos = productos;
 	}
-
 
 
 
@@ -76,7 +84,6 @@ public class Marca {
 		this.proveedor = proveedor;
 	}
 
-	
 
 
 	public List<Producto> getProductos() {
@@ -85,21 +92,10 @@ public class Marca {
 
 
 
-
-
 	public void setProductos(List<Producto> productos) {
 		this.productos = productos;
 	}
 
 
-
-	@Override
-	public String toString() {
-		return "Marca [idMarca=" + idMarca + ", nombre=" + nombre + ", proveedor=" + proveedor + ", productos="
-				+ productos + "]";
-	}
-
-
-	
 	
 }

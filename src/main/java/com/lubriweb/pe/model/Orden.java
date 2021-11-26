@@ -1,30 +1,42 @@
 package com.lubriweb.pe.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "ordenes")
-public class Orden {
+@Table(name = "orden")
+public class Orden implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Integer idOrden;
+	@Column
 	private String numero;
+	@Column
 	private Date fechaCreacion;
+	@Column
 	private Date fechaRecibida;
+	@Column
 	private double total;
 	
-	@ManyToOne
-	private Usuario usuario;
+	//Muchas Ordenes un Usuario
+	@JoinColumn(name = "IdUsuario", referencedColumnName = "idUsuario")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+	private Usuario ordenUsuarios;
 	
 	
 	@OneToOne(mappedBy = "orden")
@@ -36,28 +48,27 @@ public class Orden {
 	}
 
 
-
-	public Orden(Integer id, String numero, Date fechaCreacion, Date fechaRecibida, double total) {
+	public Orden(Integer idOrden, String numero, Date fechaCreacion, Date fechaRecibida, double total,
+			Usuario ordenUsuarios, DetalleOrden detalle) {
 		super();
-		this.id = id;
+		this.idOrden = idOrden;
 		this.numero = numero;
 		this.fechaCreacion = fechaCreacion;
 		this.fechaRecibida = fechaRecibida;
 		this.total = total;
+		this.ordenUsuarios = ordenUsuarios;
+		this.detalle = detalle;
 	}
 
 
-
-	public Integer getId() {
-		return id;
+	public Integer getIdOrden() {
+		return idOrden;
 	}
 
 
-
-	public void setId(Integer id) {
-		this.id = id;
+	public void setIdOrden(Integer idOrden) {
+		this.idOrden = idOrden;
 	}
-
 
 
 	public String getNumero() {
@@ -65,11 +76,9 @@ public class Orden {
 	}
 
 
-
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
-
 
 
 	public Date getFechaCreacion() {
@@ -77,11 +86,9 @@ public class Orden {
 	}
 
 
-
 	public void setFechaCreacion(Date fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
-
 
 
 	public Date getFechaRecibida() {
@@ -89,11 +96,9 @@ public class Orden {
 	}
 
 
-
 	public void setFechaRecibida(Date fechaRecibida) {
 		this.fechaRecibida = fechaRecibida;
 	}
-
 
 
 	public double getTotal() {
@@ -101,27 +106,19 @@ public class Orden {
 	}
 
 
-
 	public void setTotal(double total) {
 		this.total = total;
 	}
 
-	
-	
 
-
-	public Usuario getUsuario() {
-		return usuario;
+	public Usuario getOrdenUsuarios() {
+		return ordenUsuarios;
 	}
 
 
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setOrdenUsuarios(Usuario ordenUsuarios) {
+		this.ordenUsuarios = ordenUsuarios;
 	}
-
-	
-	
 
 
 	public DetalleOrden getDetalle() {
@@ -129,23 +126,12 @@ public class Orden {
 	}
 
 
-
 	public void setDetalle(DetalleOrden detalle) {
 		this.detalle = detalle;
 	}
 
-
-
-	@Override
-	public String toString() {
-		return "Orden [id=" + id + ", numero=" + numero + ", fechaCreacion=" + fechaCreacion + ", fechaRecibida="
-				+ fechaRecibida + ", total=" + total + ", usuario=" + usuario + "]";
-	}
-
-
+	
 
 	
 	
-	
-
 }
