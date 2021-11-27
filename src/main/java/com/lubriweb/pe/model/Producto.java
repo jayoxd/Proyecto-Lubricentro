@@ -32,7 +32,6 @@ public class Producto implements Serializable {
 	@Column
 	private int cantidad;
 	
-	private int estado;
 	
 	
 	
@@ -56,7 +55,6 @@ public class Producto implements Serializable {
 	public Producto() {
 		
 	}
-
 
 
 	public Producto(Integer idProducto, String nombre, String descripcion, String imagen, double precio, int cantidad,
