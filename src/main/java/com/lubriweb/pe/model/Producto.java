@@ -32,6 +32,10 @@ public class Producto implements Serializable {
 	@Column
 	private int cantidad;
 	
+	private int estado;
+	
+	
+	
 	//Muchos Usuarios un Producto
 	@JoinColumn(name = "IdUsuario", referencedColumnName = "idUsuario")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

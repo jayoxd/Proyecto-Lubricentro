@@ -28,7 +28,6 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idUsuario;
-	@Column
 	private String nombre;
 	@Column(unique = true , nullable = false)
 	private String username;
@@ -40,6 +39,7 @@ public class Usuario implements Serializable {
 	private String telefono;
 	@Column(nullable = false)
 	private String password;
+
 
 	
 	//Un Usuario Muchos Productos
