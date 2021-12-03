@@ -34,10 +34,10 @@
                                 Producto
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" th:href="@{/peliculas/listarTodo}">PELICULAS</a></li>
+                                <li><a class="dropdown-item" th:href="@{/productos/listarTodo}">Productos</a></li>
 
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" th:href="@{/peliculas/nuevo}">AG	REGAR</a></li>
+                                <li><a class="dropdown-item" th:href="@{/productos/nuevo}">AGREGAR</a></li>
                             </ul>
                         </li>
 
@@ -140,9 +140,10 @@
 					<th>descripcion</th>
 					<th>precio</th>
 					<th>cantidad</th>
+					<th>Categoria</th>
+					<th>Marca</th>
 					<th>IdUsuario</th>
-					<th>IdCategoria</th>
-					<th>IdMarca</th>
+					
 					<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Acciones</th>
 					</tr>
 				</thead>
@@ -153,9 +154,9 @@
 					<td th:text="${productos.descripcion}">descripcion</td>
 					<td th:text="${productos.precio}">precio</td>
 					<td th:text="${productos.cantidad}">cantidad</td>
+					<td th:text="${productos.categorias.nombre}">Categoria</td>
+					<td th:text="${productos.marcas.nombre}">Marca</td>
 					<td th:text="${productos.usuarios.idUsuario}">idUsuario</td>
-					<td th:text="${productos.categorias.idCategoria}">idCategoria</td>
-					<td th:text="${productos.marcas.idMarca}">idMarca</td>
 					<td><a th:href="@{/productos/actualizar/{id}(id=${productos.idProducto})}" class=" btn btn-primary" >Actualizar</a>
 						&nbsp;&nbsp;&nbsp; 
 						<a th:href="@{/productos/eliminar/{id}(id=${productos.idProducto})}" class="btn btn-danger" >Eliminar</a>

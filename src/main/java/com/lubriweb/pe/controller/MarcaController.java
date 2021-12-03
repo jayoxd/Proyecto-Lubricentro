@@ -3,11 +3,7 @@ package com.lubriweb.pe.controller;
 
 
 
-public class CategoriasController {
-
-	
-	
-
+public class MarcaController {
 	
 	
 }

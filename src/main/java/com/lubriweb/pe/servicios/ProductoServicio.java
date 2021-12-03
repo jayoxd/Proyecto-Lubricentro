@@ -13,16 +13,21 @@ import com.lubriweb.pe.repository.ProductoRepository;
 
 
 
+
 @Service
 @Transactional
 public class ProductoServicio {
 	
 	
 	@Autowired
-	ProductoRepository repositorioprod;
+ public	ProductoRepository repositorioprod;
 	
 	public ProductoServicio() {
 		
+	}
+	public Producto crear (Producto producto) {
+		
+		return repositorioprod.save(producto);
 	}
 	
 	public List<Producto> listarTodo(){
@@ -31,10 +36,7 @@ public class ProductoServicio {
 		
 	}
 	
-	public Producto crear (Producto producto) {
-		
-		return repositorioprod.save(producto);
-	}
+
 	
 	public Producto actualizar(Producto productoActualizar) {
 		Producto productoActual = repositorioprod.findById(productoActualizar.getIdProducto()).get();
@@ -65,6 +67,20 @@ public class ProductoServicio {
 	}
 
 	
-	
+	public void actualizar(int id, Producto producto) {
+		// TODO Auto-generated method stub
+		Producto productoActual = repositorioprod.findById(id).get();
+		productoActual.setIdProducto(producto.getIdProducto());
+		productoActual.setNombre(producto.getNombre());
+		productoActual.setDescripcion(producto.getDescripcion());
+		productoActual.setImagen(producto.getImagen());
+		productoActual.setPrecio(producto.getPrecio());
+		productoActual.setCantidad(producto.getCantidad());
+		productoActual.setUsuarios(producto.getUsuarios());
+		productoActual.setMarcas(producto.getMarcas());
+		productoActual.setCategorias(producto.getCategorias());
+		repositorioprod.save(productoActual);
+
+	}
 
 }
