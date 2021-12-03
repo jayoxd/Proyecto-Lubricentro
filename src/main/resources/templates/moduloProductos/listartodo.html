@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Listar Peliculas</title>
+<!-- CSS only -->
+<link
+
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" 
+        rel="stylesheet" 
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+        
+         crossorigin="anonymous">
+
+
+
+</head>
+<body>
+ <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">CINE PLUS</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"  href="index.jsp">HOME</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Producto
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" th:href="@{/peliculas/listarTodo}">PELICULAS</a></li>
+
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" th:href="@{/peliculas/nuevo}">AG	REGAR</a></li>
+                            </ul>
+                        </li>
+
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Categoria
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" th:href="@{/cine/listarTodo}">CINES</a></li>
+
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item"  th:href="@{/cine/nuevo}">AGREGAR</a></li>
+                            </ul>
+                        </li>
+
+
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Marca
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" th:href="@{/categoria/listarTodo}">CATEGORIAS</a></li>
+
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" th:href="@{/categoria/nuevo}">AGREGAR</a></li>
+                            </ul>
+                        </li>
+
+
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Usuarios
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item"th:href="@{/funciones/listarTodo}">FUNCIONES</a></li>
+
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" th:href="@{/funciones/nuevo}">AGREGAR</a></li>
+                            </ul>
+                        </li>
+
+
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" th:href="@{/sede/listarTodo}">SEDES</a></li>
+
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" th:href="@{/sede/nuevo}">AGREGAR</a></li>
+                            </ul>
+                        </li>
+
+
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item"  th:href="@{/sala/listarTodo}">SALAS</a></li>
+
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" th:href="@{/sala/nuevo}">AGREGAR</a></li>
+                            </ul>
+                        </li>
+
+
+
+
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+        <br> <br> 
+
+
+	<div align="center">
+		<div class="container">
+
+			<div class="row">
+				<h1>Productos</h1>
+			</div>
+			<table class="table table-dark table-hover">
+				<thead>
+					<tr>
+					<th>Id</th>
+					<th>nombre</th>
+					<th>descripcion</th>
+					<th>precio</th>
+					<th>cantidad</th>
+					<th>IdUsuario</th>
+					<th>IdCategoria</th>
+					<th>IdMarca</th>
+					<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="productos : ${listaProductos}">
+					<td th:text="${productos.idProducto}">Id</td>
+					<td th:text="${productos.nombre}">nombre/td>
+					<td th:text="${productos.descripcion}">descripcion</td>
+					<td th:text="${productos.precio}">precio</td>
+					<td th:text="${productos.cantidad}">cantidad</td>
+					<td th:text="${productos.usuarios.idUsuario}">idUsuario</td>
+					<td th:text="${productos.categorias.idCategoria}">idCategoria</td>
+					<td th:text="${productos.marcas.idMarca}">idMarca</td>
+					<td><a th:href="@{/productos/actualizar/{id}(id=${productos.idProducto})}" class=" btn btn-primary" >Actualizar</a>
+						&nbsp;&nbsp;&nbsp; 
+						<a th:href="@{/productos/eliminar/{id}(id=${productos.idProducto})}" class="btn btn-danger" >Eliminar</a>
+					</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

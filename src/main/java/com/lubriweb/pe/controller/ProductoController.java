@@ -30,7 +30,7 @@ public class ProductoController {
 		
 		model.addAttribute("listaProductos", listaProductos);
 		
-		return "/moduloProductos/listarTodo";
+		return "/moduloProductos/listartodo";
 		
 	}
 	
@@ -57,7 +57,7 @@ public class ProductoController {
 	@RequestMapping(value= "/actualizar/{id}")
 	public ModelAndView editarProducto(@PathVariable(name = "id") int id) {
 		
-		ModelAndView mav = new ModelAndView("/moduloProductos/editarProducto");
+		ModelAndView mav = new ModelAndView("/moduloProductos/editarProductos");
 		
 		Producto producto  = servicioprod.buscarPorID(id);
 		
