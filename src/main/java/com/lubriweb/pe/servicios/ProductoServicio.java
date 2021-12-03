@@ -68,7 +68,7 @@ public class ProductoServicio {
 
 	
 	public void actualizar(int id, Producto producto) {
-		// TODO Auto-generated method stub
+		
 		Producto productoActual = repositorioprod.findById(id).get();
 		productoActual.setIdProducto(producto.getIdProducto());
 		productoActual.setNombre(producto.getNombre());
