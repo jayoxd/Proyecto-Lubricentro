@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,11 +24,11 @@ public class Rol implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idRole;
 	@Column(unique = true, nullable = false)
-	private String Tipo;
+	private String tipo = RoleType.USER.name();
 	
 	//Muchos roles tiene Muchos Usuarios
 	//Lado inverse
-	@ManyToMany(mappedBy = "itemsRol") //referencia o comunicacion o el lazo que los une -> a la otra coleccion itemsRol
+	@ManyToMany(mappedBy = "itemsRol", fetch = FetchType.EAGER) //referencia o comunicacion o el lazo que los une -> a la otra coleccion itemsRol
 	private Set<Usuario> itemsUsuario = new HashSet<>();
 	
 	
@@ -36,12 +37,14 @@ public class Rol implements Serializable {
 	}
 
 
+
 	public Rol(Integer idRole, String tipo, Set<Usuario> itemsUsuario) {
 		
 		this.idRole = idRole;
-		Tipo = tipo;
+		this.tipo = tipo;
 		this.itemsUsuario = itemsUsuario;
 	}
+
 
 
 	public Integer getIdRole() {
@@ -54,14 +57,17 @@ public class Rol implements Serializable {
 	}
 
 
+
 	public String getTipo() {
-		return Tipo;
+		return tipo;
 	}
+
 
 
 	public void setTipo(String tipo) {
-		Tipo = tipo;
+		this.tipo = tipo;
 	}
+
 
 
 	public Set<Usuario> getItemsUsuario() {

@@ -38,6 +38,11 @@ public class Orden implements Serializable{
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
 	private Usuario ordenUsuarios;
 	
+	//Muchas Ordenes un Pago
+	@JoinColumn(name = "IdMetodoPago", referencedColumnName = "idMetodoPago")
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	private MetodoPago metodoPago;
+	
 	
 	@OneToOne(mappedBy = "orden")
 	private DetalleOrden detalle;
@@ -48,9 +53,10 @@ public class Orden implements Serializable{
 	}
 
 
+
 	public Orden(Integer idOrden, String numero, Date fechaCreacion, Date fechaRecibida, double total,
 			Usuario ordenUsuarios, DetalleOrden detalle) {
-		super();
+		
 		this.idOrden = idOrden;
 		this.numero = numero;
 		this.fechaCreacion = fechaCreacion;
@@ -59,6 +65,8 @@ public class Orden implements Serializable{
 		this.ordenUsuarios = ordenUsuarios;
 		this.detalle = detalle;
 	}
+
+
 
 
 	public Integer getIdOrden() {
@@ -121,15 +129,21 @@ public class Orden implements Serializable{
 	}
 
 
+
+
 	public DetalleOrden getDetalle() {
 		return detalle;
 	}
+
+
 
 
 	public void setDetalle(DetalleOrden detalle) {
 		this.detalle = detalle;
 	}
 
+
+	
 	
 
 	

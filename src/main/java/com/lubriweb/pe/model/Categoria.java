@@ -13,37 +13,36 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "categoria")
 public class Categoria implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idCategoria;
-	@Column(nullable=false, unique=true)
+	@Column(nullable = false, unique = true, length = 45)
 	private String nombre;
 	@Column
 	private String Descripcion;
+
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria", fetch = FetchType.LAZY)
+	private List<Marca> marcas;
 	
-	//Una Categoria Muchos Productos
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "categorias", fetch = FetchType.LAZY)
-	private List<Producto> productos;
-	
-	
+
 	public Categoria() {
-		
+
 	}
 
 
-	public Categoria(Integer idCategoria, String nombre, String descripcion, List<Producto> productos) {
+	public Categoria(Integer idCategoria, String nombre, String descripcion, List<Marca> marcas) {
 		super();
 		this.idCategoria = idCategoria;
 		this.nombre = nombre;
 		Descripcion = descripcion;
-		this.productos = productos;
+		this.marcas = marcas;
 	}
 
 
@@ -77,15 +76,14 @@ public class Categoria implements Serializable {
 	}
 
 
-	public List<Producto> getProductos() {
-		return productos;
+	public List<Marca> getMarcas() {
+		return marcas;
 	}
 
 
-	public void setProductos(List<Producto> productos) {
-		this.productos = productos;
+	public void setMarcas(List<Marca> marcas) {
+		this.marcas = marcas;
 	}
 
 
-	
 }

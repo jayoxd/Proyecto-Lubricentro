@@ -2,10 +2,9 @@ package com.lubriweb.pe.model;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,7 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+
 import javax.persistence.Table;
 
 @Entity
@@ -28,6 +27,7 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idUsuario;
+	@Column()
 	private String nombre;
 	@Column(unique = true , nullable = false)
 	private String username;
@@ -39,19 +39,12 @@ public class Usuario implements Serializable {
 	private String telefono;
 	@Column(nullable = false)
 	private String password;
+	@Column(nullable = false)
+	private String estado = StateType.ACTIVE.name();
 
-
-	
-	//Un Usuario Muchos Productos
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarios", fetch = FetchType.LAZY)
-	private List<Producto> productos;
-	
-	//Un Usuario Muchas Ordenes
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordenUsuarios", fetch = FetchType.LAZY)
-	private List<Orden> ordenes;
     
     //Muchos Usuarios tiene Muchos Roles
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "usuario_rol",
     		joinColumns=@JoinColumn(name="id_usuario",nullable=false,
     		    foreignKey=@ForeignKey(foreignKeyDefinition="foreign key(id_usuario) references usuario(id_usuario)")),
@@ -66,8 +59,8 @@ public class Usuario implements Serializable {
 
 
 	public Usuario(Integer idUsuario, String nombre, String username, String email, String direccion, String telefono,
-			String password, List<Producto> productos, List<Orden> ordenes, Set<Rol> itemsRol) {
-	
+			String password, String estado, Set<Rol> itemsRol) {
+		super();
 		this.idUsuario = idUsuario;
 		this.nombre = nombre;
 		this.username = username;
@@ -75,8 +68,7 @@ public class Usuario implements Serializable {
 		this.direccion = direccion;
 		this.telefono = telefono;
 		this.password = password;
-		this.productos = productos;
-		this.ordenes = ordenes;
+		this.estado = estado;
 		this.itemsRol = itemsRol;
 	}
 
@@ -151,23 +143,13 @@ public class Usuario implements Serializable {
 	}
 
 
-	public List<Producto> getProductos() {
-		return productos;
+	public String getEstado() {
+		return estado;
 	}
 
 
-	public void setProductos(List<Producto> productos) {
-		this.productos = productos;
-	}
-
-
-	public List<Orden> getOrdenes() {
-		return ordenes;
-	}
-
-
-	public void setOrdenes(List<Orden> ordenes) {
-		this.ordenes = ordenes;
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 
@@ -179,8 +161,12 @@ public class Usuario implements Serializable {
 	public void setItemsRol(Set<Rol> itemsRol) {
 		this.itemsRol = itemsRol;
 	}
+
+
+
+
 	
 	
-	
+
 
 }

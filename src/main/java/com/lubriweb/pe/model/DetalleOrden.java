@@ -13,9 +13,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+
 @Entity
-@Table(name = "detalle")
-public class DetalleOrden implements Serializable {
+@Table(name = "detalle_orden")
+public class DetalleOrden implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -24,113 +25,84 @@ public class DetalleOrden implements Serializable {
 	private Integer id;
 	@Column
 	private String nombre;
-	@Column
+	@Column(length = 45, nullable = false, unique = true)
 	private double cantidad;
 	@Column
 	private double precio;
 	@Column
 	private double total;
 	
+
+	//Muchos Detalles un Producto <-> un Producto Muchos Detalles (Relacion U - M )
+	@JoinColumn(name = "IdProducto", referencedColumnName = "idProducto")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+	private Producto producto;
 	
 	@OneToOne	
 	private Orden orden;
-	
-	//Muchos Productos en un Detalle de Orden
-	@JoinColumn(name = "IdProducto", referencedColumnName = "idProducto")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-	private Producto productos;
-	
+
 	
 	public DetalleOrden() {
 		
 	}
 
-
-	public DetalleOrden(Integer id, String nombre, double cantidad, double precio, double total, Orden orden,
-			Producto productos) {
-		super();
+	public DetalleOrden(Integer id, String nombre, double cantidad, double precio, double total, Producto producto) {
+		
 		this.id = id;
 		this.nombre = nombre;
 		this.cantidad = cantidad;
 		this.precio = precio;
 		this.total = total;
-		this.orden = orden;
-		this.productos = productos;
+		this.producto = producto;
 	}
-
 
 	public Integer getId() {
 		return id;
 	}
 
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 
 	public String getNombre() {
 		return nombre;
 	}
 
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
 
 	public double getCantidad() {
 		return cantidad;
 	}
 
-
 	public void setCantidad(double cantidad) {
 		this.cantidad = cantidad;
 	}
-
 
 	public double getPrecio() {
 		return precio;
 	}
 
-
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
-
 
 	public double getTotal() {
 		return total;
 	}
 
-
 	public void setTotal(double total) {
 		this.total = total;
 	}
 
-
-	public Orden getOrden() {
-		return orden;
+	public Producto getProducto() {
+		return producto;
 	}
 
-
-	public void setOrden(Orden orden) {
-		this.orden = orden;
+	public void setProducto(Producto producto) {
+		this.producto = producto;
 	}
-
-
-	public Producto getProductos() {
-		return productos;
-	}
-
-
-	public void setProductos(Producto productos) {
-		this.productos = productos;
-	}
-	
-	
-
-
 	
 	
 
