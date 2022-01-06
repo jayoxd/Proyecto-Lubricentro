@@ -37,6 +37,14 @@ public class Categoria implements Serializable {
 	}
 
 
+	public Categoria(Integer idCategoria, String nombre, String descripcion) {
+		super();
+		this.idCategoria = idCategoria;
+		this.nombre = nombre;
+		Descripcion = descripcion;
+	}
+
+
 	public Categoria(Integer idCategoria, String nombre, String descripcion, List<Marca> marcas) {
 		super();
 		this.idCategoria = idCategoria;

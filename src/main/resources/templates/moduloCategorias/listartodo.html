@@ -3,7 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Listar Productos</title>
+<title>Listar Marcas</title>
 <!-- CSS only -->
 <link
 
@@ -25,7 +25,7 @@
 		<div class="container">
 
 			<div class="row">
-				<h1>PRODUCTOS</h1>
+				<h1>Categorias</h1>
 			</div>
 			<table class="table table-dark table-hover">
 				<thead>
@@ -33,23 +33,17 @@
 						<th>Id</th>
 						<th>Nombre</th>
 						<th>Descripcion</th>
-						<th>Imagen</th>
-						<th>precio</th>
-						<th>cantidad</th>
-						<th>Marca</th>
+						
 						
 					
 					</tr>
 				</thead>
 				<tbody>
-						<tr th:each="productos : ${listaproductos}">
-						<td th:text="${productos.idProducto}">Id</td>
-					    <td th:text="${productos.nombre}">nombre/<td>
-					    <td th:text="${productos.descripcion}">descripcion</td>
-						<td th:text="${productos.imagen}">precio</td>
-					    <td th:text="${productos.precio}">precio</td>
-					    <td th:text="${productos.cantidad}">cantidad</td>
-					    <td th:text="${productos.marcas.nombre}">Marca</td>
+						<tr th:each="categorias : ${listacategorias}">
+						<td th:text="${categorias.idCategoria}">Id</td>
+					    <td th:text="${categorias.nombre}">nombre/<td>
+					    <td th:text="${categorias.Descripcion}">descripcion</td>
+					   
 			
 					</tr>
 				</tbody>

@@ -3,7 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Listar Productos</title>
+<title>Listar Marcas</title>
 <!-- CSS only -->
 <link
 
@@ -32,24 +32,20 @@
 					<tr>
 						<th>Id</th>
 						<th>Nombre</th>
-						<th>Descripcion</th>
-						<th>Imagen</th>
-						<th>precio</th>
-						<th>cantidad</th>
-						<th>Marca</th>
+						<th>Proveedor</th>
+						<th>Categoria</th>
+						
 						
 					
 					</tr>
 				</thead>
 				<tbody>
-						<tr th:each="productos : ${listaproductos}">
-						<td th:text="${productos.idProducto}">Id</td>
-					    <td th:text="${productos.nombre}">nombre/<td>
-					    <td th:text="${productos.descripcion}">descripcion</td>
-						<td th:text="${productos.imagen}">precio</td>
-					    <td th:text="${productos.precio}">precio</td>
-					    <td th:text="${productos.cantidad}">cantidad</td>
-					    <td th:text="${productos.marcas.nombre}">Marca</td>
+						<tr th:each="marcas : ${listamarcas}">
+						<td th:text="${marcas.idMarca}">Id</td>
+					    <td th:text="${marcas.nombre}">nombre/<td>
+					    <td th:text="${marcas.proveedor}">proveedor</td>
+						<td th:text="${marcas.categoria.nombre}">categoria</td>
+					   
 			
 					</tr>
 				</tbody>
