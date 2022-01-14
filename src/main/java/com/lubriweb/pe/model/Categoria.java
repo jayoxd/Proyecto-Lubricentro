@@ -13,8 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "categoria")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
 public class Categoria implements Serializable {
 
 	private static final long serialVersionUID = 1L;

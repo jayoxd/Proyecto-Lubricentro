@@ -47,6 +47,15 @@ public class AppController {
 
 	}
 	
+	@GetMapping("/Nosotros")
+	public String Nosotros() {
+
+		return "Nosotros";
+
+	}
+	
+	
+	
 	@GetMapping("/register")
 	public String showFormRegister(Model model) {
 		

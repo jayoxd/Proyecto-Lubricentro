@@ -18,8 +18,12 @@ import javax.persistence.ManyToMany;
 
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "usuario")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
 public class Usuario implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
