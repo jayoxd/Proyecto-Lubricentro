@@ -34,7 +34,7 @@ public class Categoriacontroller {
 
 	System.out.println(c);
 
-	cSrvc.guardar(c);
+	cSrvc.crear(c);
 
 	return c;
 	}

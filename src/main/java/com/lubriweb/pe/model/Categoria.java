@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -33,8 +34,9 @@ public class Categoria implements Serializable {
 
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria", fetch = FetchType.LAZY)
+	@JsonBackReference(value="cat_marca")
+
 	private List<Marca> marcas;
-	
 
 	public Categoria() {
 

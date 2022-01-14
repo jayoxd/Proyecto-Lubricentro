@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.lubriweb.pe.model.Categoria;
 @Service
-public class Categoriaservicio {
+public class Categoriaservicio  {
 	@Autowired
 	
 private Categoriarepository cRepositorio;
@@ -19,12 +19,14 @@ private Categoriarepository cRepositorio;
 
 
 
-		public void guardar(Categoria c) {
-
-			cRepositorio.save(c);
-
-		}
-
+	
+		
+		public Categoria crear(Categoria categoria) {
+			return cRepositorio.save(categoria);
+			}
+		
+		
+		
 		public Categoria obtenerCategoria(Integer id) {
 
 			return cRepositorio.getOne(id);

@@ -18,6 +18,7 @@ import javax.persistence.ManyToMany;
 
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -49,6 +50,8 @@ public class Usuario implements Serializable {
     
     //Muchos Usuarios tiene Muchos Roles
     @ManyToMany(fetch = FetchType.EAGER)
+	@JsonBackReference(value="usu_rol")
+
     @JoinTable(name = "usuario_rol",
     		joinColumns=@JoinColumn(name="id_usuario",nullable=false,
     		    foreignKey=@ForeignKey(foreignKeyDefinition="foreign key(id_usuario) references usuario(id_usuario)")),
