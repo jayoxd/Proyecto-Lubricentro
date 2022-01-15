@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "marca")
 public class Marca implements Serializable {
@@ -32,6 +34,7 @@ public class Marca implements Serializable {
 	// Muchas Marcas una categoria <-> Una Categoria Muchas marcas (Relacion U - M)
 	@JoinColumn(name = "IdCategoria", referencedColumnName = "idCategoria")
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JsonBackReference(value="marca_cate")
 	private Categoria categoria;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "marcas", fetch = FetchType.LAZY)

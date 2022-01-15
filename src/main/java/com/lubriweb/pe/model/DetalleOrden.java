@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 @Entity
 @Table(name = "detalle_orden")
@@ -36,6 +38,7 @@ public class DetalleOrden implements Serializable{
 	//Muchos Detalles un Producto <-> un Producto Muchos Detalles (Relacion U - M )
 	@JoinColumn(name = "IdProducto", referencedColumnName = "idProducto")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JsonBackReference(value="detord_prod")
 	private Producto producto;
 	
 	@OneToOne	

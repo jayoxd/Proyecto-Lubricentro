@@ -35,7 +35,6 @@ public class Categoria implements Serializable {
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria", fetch = FetchType.LAZY)
 	@JsonBackReference(value="cat_marca")
-
 	private List<Marca> marcas;
 
 	public Categoria() {

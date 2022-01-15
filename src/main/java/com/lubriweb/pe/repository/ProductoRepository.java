@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.lubriweb.pe.model.Producto;
 
 @Repository
-public interface ProductoRepositoy  extends JpaRepository<Producto,Integer>{
+public interface ProductoRepository  extends JpaRepository<Producto,Integer>{
 
 }
