@@ -71,11 +71,11 @@
 			  
 			  <div class= "col-sm-4">
 			  
-			    <select th:field="*{marcas}" class="form-control" multiple="multiple" required>
+			    <select th:field="*{categoria}" class="form-control"  required>
 			    
-			    <th:block th:each= "marca : ${listaMarcas}">
+			    <th:block th:each= "categoria : ${lstCategoria}">
 			    
-			    <option th:text= "${marca.nombre}" th:value="${marca.idMarca}"></option>
+			    <option th:text= "${categoria.nombre}" th:value="${categoria.idCategoria}"></option>
 			    
 			    </th:block>
 			    

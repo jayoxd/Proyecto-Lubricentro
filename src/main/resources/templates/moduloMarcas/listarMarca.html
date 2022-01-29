@@ -438,6 +438,12 @@
 								style="">
 								Proveedor
 							</th>
+								<th class="sorting" tabindex="0" aria-controls="example2"
+								rowspan="1" colspan="1"
+								aria-label="Platform(s): activate to sort column ascending"
+								style="">
+								Categoria
+							</th>
 							
 						</tr>
 				</thead>
@@ -450,7 +456,7 @@
 					 <td th:text="${marca.idMarca}"></td>
 					 <td th:text="${marca.nombre}"></td>
 					 <td th:text="${marca.proveedor}"></td>
-					 
+					  <td th:text="${marca.categoria.nombre}"></td>
 
 			        <!--  <td>
 			    

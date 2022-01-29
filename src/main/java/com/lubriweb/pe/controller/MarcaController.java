@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.lubriweb.pe.model.Categoria;
 import com.lubriweb.pe.model.Marca;
+import com.lubriweb.pe.service.CategoriaService;
 import com.lubriweb.pe.service.MarcaService;
 
 
@@ -21,6 +23,9 @@ public class MarcaController {
 	
 	@Autowired
 	private MarcaService marcsrvc;
+	
+	@Autowired
+	private CategoriaService catsrvc;
 	
 	
 	@GetMapping("")
@@ -37,10 +42,11 @@ public class MarcaController {
 	@GetMapping("/create")
 	public String nuevaMarca(Model model) {
 		
-		
+		List<Categoria> lstCategoria = catsrvc.findAll();
 		
 		model.addAttribute("marca", new Marca());
-		
+		model.addAttribute("lstCategoria", lstCategoria);
+
 
 		return "moduloMarcas/nuevaMarca";
 	}
