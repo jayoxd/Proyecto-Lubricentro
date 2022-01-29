@@ -15,8 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 @Entity
 @Table(name = "marca")
 public class Marca implements Serializable {
@@ -30,71 +28,82 @@ public class Marca implements Serializable {
 	private String nombre;
 	@Column
 	private String proveedor;
-	
+
 	// Muchas Marcas una categoria <-> Una Categoria Muchas marcas (Relacion U - M)
 	@JoinColumn(name = "IdCategoria", referencedColumnName = "idCategoria")
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JsonBackReference(value="marca_cate")
 	private Categoria categoria;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "marcas", fetch = FetchType.LAZY)
 	private List<Producto> productos;
-
-
 
 	public Marca() {
 
 	}
 
-
 	public Marca(Integer idMarca, String nombre, String proveedor, Categoria categoria) {
-		super();
+
 		this.idMarca = idMarca;
 		this.nombre = nombre;
 		this.proveedor = proveedor;
 		this.categoria = categoria;
 	}
 
+	public Marca(Integer idMarca, String nombre, String proveedor) {
+
+		this.idMarca = idMarca;
+		this.nombre = nombre;
+		this.proveedor = proveedor;
+
+	}
+
+	public Marca(Integer idMarca) {
+
+		this.idMarca = idMarca;
+
+	}
+
+	public Marca(String nombre) {
+
+			this.nombre = nombre;
+
+	}
 
 	public Integer getIdMarca() {
 		return idMarca;
 	}
 
-
 	public void setIdMarca(Integer idMarca) {
 		this.idMarca = idMarca;
 	}
-
 
 	public String getNombre() {
 		return nombre;
 	}
 
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
 
 	public String getProveedor() {
 		return proveedor;
 	}
 
-
 	public void setProveedor(String proveedor) {
 		this.proveedor = proveedor;
 	}
-
 
 	public Categoria getCategoria() {
 		return categoria;
 	}
 
-
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
 
-	
-	
+	@Override
+	public String toString() {
+		return nombre;
+	}
+
 }

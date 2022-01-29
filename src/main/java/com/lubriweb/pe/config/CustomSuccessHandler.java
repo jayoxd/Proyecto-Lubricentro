@@ -50,6 +50,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 		else if (roles.contains("ROLE_ADMIN"))
 			url = "/admin";
 		else if (roles.contains("ROLE_USER"))
+			
 			url = "/user";
 		else
 			url = "/access_denied";

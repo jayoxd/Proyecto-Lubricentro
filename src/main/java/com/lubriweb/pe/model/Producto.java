@@ -15,8 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 @Entity
 @Table(name = "producto")
 public class Producto implements Serializable {
@@ -40,11 +38,9 @@ public class Producto implements Serializable {
 	// Muchos Productos una Marca <-> Una Marca Muchos Productos (Relacion M - U)
 	@JoinColumn(name = "IdMarca", referencedColumnName = "idMarca")
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JsonBackReference(value="prod_marc")
 	private Marca marcas;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "producto", fetch = FetchType.LAZY)
-	@JsonBackReference(value="prod_det")
 	private List<DetalleOrden> detalles;
 
 	public Producto() {
@@ -53,7 +49,7 @@ public class Producto implements Serializable {
 
 	public Producto(Integer idProducto, String nombre, String descripcion, String imagen, double precio, int cantidad,
 			Marca marcas, List<DetalleOrden> detalles) {
-		super();
+
 		this.idProducto = idProducto;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -62,6 +58,24 @@ public class Producto implements Serializable {
 		this.cantidad = cantidad;
 		this.marcas = marcas;
 		this.detalles = detalles;
+	}
+
+	public Producto(String nombre, String descripcion, String imagen, double precio, int cantidad, Marca marcas,
+			List<DetalleOrden> detalles) {
+
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.imagen = imagen;
+		this.precio = precio;
+		this.cantidad = cantidad;
+		this.marcas = marcas;
+		this.detalles = detalles;
+	}
+
+	public Producto(String nombre) {
+
+		this.nombre = nombre;
+
 	}
 
 	public Integer getIdProducto() {
@@ -128,5 +142,4 @@ public class Producto implements Serializable {
 		this.detalles = detalles;
 	}
 
-	
 }

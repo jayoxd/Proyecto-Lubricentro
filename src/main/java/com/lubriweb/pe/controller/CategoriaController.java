@@ -1,0 +1,80 @@
+package com.lubriweb.pe.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.lubriweb.pe.model.Categoria;
+import com.lubriweb.pe.model.Marca;
+import com.lubriweb.pe.service.CategoriaService;
+import com.lubriweb.pe.service.MarcaService;
+
+@Controller
+@RequestMapping("/categorias")
+public class CategoriaController {
+
+	@Autowired
+	private CategoriaService catsrvc;
+
+	@Autowired
+	private MarcaService marcasrvc;
+
+	@GetMapping("")
+	public String listartodo(Model model) {
+
+		List<Categoria> lstCategorias = catsrvc.findAll();
+
+		model.addAttribute("lstCategorias", lstCategorias);
+
+		return "moduloCategorias/listarCategoria";
+	}
+
+	@GetMapping("/create")
+	public String nuevaCategoria(Model model) {
+
+		List<Marca> lstMarcas = marcasrvc.findAll();
+
+		model.addAttribute("lstMarcas", lstMarcas);
+		model.addAttribute("categoria", new Categoria());
+
+		return "moduloCategorias/nuevaCategoria";
+	}
+
+	@PostMapping("/save")
+	public String save(Categoria categoria) {
+
+		catsrvc.save(categoria);
+
+		return "redirect:/categorias";
+	}
+
+	@GetMapping("/edit/{id}")
+	public String edit(@PathVariable("id") Integer id, Model model) {
+
+		List<Marca> lstMarcas = marcasrvc.findAll();
+
+		Categoria categoria = catsrvc.getFindById(id);
+
+		model.addAttribute("lstMarcas", lstMarcas);
+		model.addAttribute("categoria", categoria);
+
+		return "moduloCategorias/nuevaCategoria";
+
+	}
+
+	@GetMapping("/delete/{id}")
+	public String delete(@PathVariable Integer id) {
+
+		catsrvc.delete(id);
+
+		return "redirect:/categorias";
+
+	}
+
+}

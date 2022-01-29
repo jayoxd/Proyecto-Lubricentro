@@ -1,0 +1,8 @@
+
+body {
+
+  padding-top: 56px;
+  background: url(/imgs/fondito-negro.jpg);	
+  background-size: cover;
+  background-attachment: fixed;
+}

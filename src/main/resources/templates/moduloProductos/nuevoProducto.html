@@ -1,4 +1,4 @@
-	<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -8,91 +8,158 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Spring eCommerce</title>
-
-
+  <title>Spring LubriCenter</title>
   
+  
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
+
+   <!-- Theme style -->
+  <link rel="stylesheet" href="css/adminlte.min.css">
+
+
+  <!-- Bootstrap core CSS -->
+   <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link th:href="@{/css/custom-features2.css}" rel="stylesheet">
+
 </head>
 
 <body>
 
+  <!-- Navigation -->
+   <div th:include="fragments/fragment_admin.html::header"></div>
+   
+   <!-- 
+   <div class="container">
+   
+    Page Heading/Breadcrumbs
+		  <h1 class="mt-4 mb-3">
+			Spring LubriCenter 
+		  </h1>
 
-<!-- Page Content -->
-<div class="container">
+		  <ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+		  </ol>
+   </div> -->
+   
 
+		<!-- Page Content -->
+		<div class="container p-4 mr-10">
 
-  <!-- Page Heading/Breadcrumbs -->
-  <h1 class="mt-4 mb-3">
-    Spring eCommerce <small>Productos</small>
-  </h1>
+          <div class="card card-primary p-2">
+          
+             <!--card-header start -->
+              <div class="card-header">
+                 <h1 class="card-title" th:if="${producto.idProducto == null}">Crear Producto</h1>
+                 <h1 class="card-title" th:unless="${producto.idProducto == null}">Editar Producto</h1>
+               </div>
+              <!-- /.card-header -->
+                
+               <!-- form start -->
+              <form th:action="@{/productos/save}" th:object="${producto}" 
+		             method="post" enctype="multipart/form-data">
+		             
+		           <input type="hidden" th:field="*{idProducto}" th:value="${producto.idProducto}"> 
+		             
+                <div class="card-body">
+             
+                 
+                  <div class="form-group col-6">
+                    <label for="exampleInputEmail1">Nombre:</label>
+                    <input type="text" th:field="*{nombre}" class="form-control" id="nombre" name="nombre"
+                     placeholder="Nombre Producto" required>
+                  </div>
+                  
+                  <div class="col-sm-6">
+                      <!-- textarea -->
+                      <div class="form-group">
+                        <label>Descripcion</label>
+                        <textarea class="form-control" rows="3" id="descripcion" name="descripcion"
+						placeholder="Ingrese la descripcion del producto" required>
+						
+						</textarea>
+                      </div>
+                  </div>
+                  
+                  
+                   <div class="form-group">
+                        <label class="control-label col-sm-2" for="img">Imagen:</label>
+                        <div class="col-sm-10">
+                        <input type="file" class="form-control-file" id="img" name="img">
+                        </div>
+                  </div>
+           
+             
+                   <div class="form-group col-6">
+                    <label for="exampleInputEmail1">Precio:</label>
+                    <input type="text" th:field="*{precio}" class="form-control" id="precio" name="precio"
+                     placeholder="Precio" required>
+                  </div>
+                  
+                  <div class="form-group col-6">
+                    <label for="exampleInputEmail1">Cantidad:</label>
+                    <input type="text" th:field="*{cantidad}" class="form-control" id="cantidad" name="cantidad"
+                     placeholder="Cantidad" required>
+                  </div>
+                  
+                 <div class="form-group row col-6">
+			
+			    <label class = "col-form-label col-sm-3">Selecione una Marca : </label>
+			  
+			        <div class= "col-sm-4">
+			  
+			        <select th:field="*{marcas}"
+			                class="custom-select form-control-border border-width-2"
+			                id="exampleSelectBorderWidth2" required>
+					
+                           <th:block th:each= "marca : ${lstMarcas}">
+			    
+			                  <option th:text= "${marca.nombre}" th:value="${marca.idMarca}"></option>
+			    
+			               </th:block>
+                    
+                   </select>
+			  
+			       </div>
+			      </div>
+			      
+               
+              </div> 
+                <!-- /.card-body -->
 
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="">Home</a></li>
-    <li class="breadcrumb-item active">Crear Productos</li>
-  </ol>
+                 <div class="card-footer">
+                
+                  <div class="row">
+			         <div class="col-sm-2">
+				     <button type="submit" class="btn btn-success">
+				     <span class="glyphicon glyphicon-saved"></span> Guardar
+				     </button>
+			         </div>
+			      </div>
+                 </div>
+                
+             </form>
+        </div>
+		  
+	</div>
+	<!-- /.container -->
+		
 
-  <h2>Crear Producto</h2>
-  <form class="form-horizontal" th:action="@{/moduloProductos/save}" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="nombre">Nombre:</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="nombre" name="nombre"
-        placeholder="Ingrese el nombre del producto" autocomplete="off" required>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="descripcion">Descripción:</label>
-      <div class="col-sm-10">
-        <textarea class="form-control" id="descripcion" name="descripcion"
-        placeholder="Ingrese la descripcion del producto" required
-        autocomplete="off"> </textarea>
-      </div>
-    </div>
+<!-- REQUIRED SCRIPTS -->
 
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="cantidad">Cantidad:</label>
-      <div class="col-sm-10">
-        <input type="number" class="form-control" id="cantidad"
-        name="cantidad" placeholder="Ingrese la cantidad del producto"
-        required autocomplete="off">
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="precio">Precio:</label>
-      <div class="col-sm-10">
-        <input type="number" class="form-control" step="any" id="precio" name="precio"
-        placeholder="Ingrese el precio del producto" autocomplete="off" required>
-      </div>
-    </div>
-
-   <div class="form-group">
-      <label class="control-label col-sm-2" for="imagen">Imagen:</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" step="any" id="imagen" name="imagen"
-        placeholder="Ingrese el precio del producto" autocomplete="off" required>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-2">
-        <button type="submit" class="btn btn-success">
-          <span class="glyphicon glyphicon-saved"></span> Guardar
-        </button>
-      </div>
-    </div>
-
-  </form>
-
-</div>
-<!-- /.container -->
-
-<!-- Footer -->
-
-
- <!-- Bootstrap core JavaScript -->
- 
-
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- Bootstrap 4 -->
+	<script src="js/bootstrap.bundle.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="js/adminlte.min.js"></script>
+	<!-- AdminLTE for demo purposes -->
+	<script src="js/demo.js"></script>
+	<!-- Font Awesome -->
+	<script src="js/fontawesome.all.min.js"></script>
 </body>
 
 </html>

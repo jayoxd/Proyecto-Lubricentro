@@ -1,6 +1,7 @@
 package com.lubriweb.pe.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,13 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 @Entity
 @Table(name = "categoria")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-
 public class Categoria implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -30,73 +26,70 @@ public class Categoria implements Serializable {
 	@Column(nullable = false, unique = true, length = 45)
 	private String nombre;
 	@Column
-	private String Descripcion;
+	private String descripcion;
 
-
+	// una Categoria Muchas Marcas <-> Muchas Marcas una Categoria (Relacion U - M)
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria", fetch = FetchType.LAZY)
-	@JsonBackReference(value="cat_marca")
-	private List<Marca> marcas;
+	private List<Marca> marcas = new ArrayList<>();
 
 	public Categoria() {
 
 	}
 
+	public Categoria(Integer idCategoria) {
 
-	public Categoria(Integer idCategoria, String nombre, String descripcion) {
-		super();
 		this.idCategoria = idCategoria;
-		this.nombre = nombre;
-		Descripcion = descripcion;
+
 	}
 
-
 	public Categoria(Integer idCategoria, String nombre, String descripcion, List<Marca> marcas) {
-		super();
+
 		this.idCategoria = idCategoria;
 		this.nombre = nombre;
-		Descripcion = descripcion;
+		this.descripcion = descripcion;
 		this.marcas = marcas;
 	}
 
+	public Categoria(String nombre, String descripcion, List<Marca> marcas) {
+
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.marcas = marcas;
+	}
+	
+	
+	
 
 	public Integer getIdCategoria() {
 		return idCategoria;
 	}
 
-
 	public void setIdCategoria(Integer idCategoria) {
 		this.idCategoria = idCategoria;
 	}
-
 
 	public String getNombre() {
 		return nombre;
 	}
 
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-
 	public String getDescripcion() {
-		return Descripcion;
+		return descripcion;
 	}
-
 
 	public void setDescripcion(String descripcion) {
-		Descripcion = descripcion;
+		this.descripcion = descripcion;
 	}
-
 
 	public List<Marca> getMarcas() {
 		return marcas;
 	}
 
-
 	public void setMarcas(List<Marca> marcas) {
 		this.marcas = marcas;
 	}
-
 
 }
