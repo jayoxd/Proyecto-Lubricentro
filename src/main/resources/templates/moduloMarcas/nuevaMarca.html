@@ -38,15 +38,15 @@
 			<li class="breadcrumb-item active">Crear Marca</li>
 		  </ol>
 
-         <!--  <div>
-          <h1 th:if="${categoria.idCategoria == null}">Crear Categoria</h1>
-          <h1 th:unless="${categoria.idCategoria == null}">Editar Categoria</h1>
-          </div> -->
+           <div class="card-header">
+                 <h1 class="card-title" th:if="${marca.idMarca == null}">Crear Marca</h1>
+                 <h1 class="card-title" th:unless="${marca.idMarca == null}">Editar Marca</h1>
+               </div>
 		  
 		  <form class="form-horizontal" th:action="@{/marcas/save}" th:object="${marca}" 
 		       method="post" enctype="multipart/form-data">
 		       
-		       <!-- <input type="hidden" th:field="*{idCategoria}" th:value="${categoria.idCategoria}"> -->
+		      <input type="hidden" th:field="*{idMarca}" th:value="${marca.idMarca}"> 
 		       
 		       
 			<div class="form-group">

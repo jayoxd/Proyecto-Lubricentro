@@ -444,6 +444,20 @@
 								style="">
 								Categoria
 							</th>
+							</th>
+								<th class="sorting" tabindex="0" aria-controls="example2"
+								rowspan="1" colspan="1"
+								aria-label="Platform(s): activate to sort column ascending"
+								style="">
+								Accion
+							</th>
+							</th>
+								<th class="sorting" tabindex="0" aria-controls="example2"
+								rowspan="1" colspan="1"
+								aria-label="Platform(s): activate to sort column ascending"
+								style="">
+								Accion
+							</th>
 							
 						</tr>
 				</thead>
@@ -458,17 +472,17 @@
 					 <td th:text="${marca.proveedor}"></td>
 					  <td th:text="${marca.categoria.nombre}"></td>
 
-			        <!--  <td>
+			        <td>
 			    
-			            <a class="btn btn-warning" th:href="@{/categorias/edit/{id}(id=${categoria.idCategoria})}">Editar</a>
+			            <a class="btn btn-warning" th:href="@{/marcas/edit/{id}(id=${marca.idMarca})}">Editar</a>
 			    
 			         </td>
 														
 			         <td>
 			         
-			         <a class="btn btn-danger" th:href="@{/categorias/delete/{id}(id=${categoria.idCategoria})}">Eliminar</a>
+			         <a class="btn btn-danger" th:href="@{/marcas/delete/{id}(id=${marca.idMarca})}">Eliminar</a>
 			         
-			         </td> -->
+			         </td> 
 
 				</tr>
 
