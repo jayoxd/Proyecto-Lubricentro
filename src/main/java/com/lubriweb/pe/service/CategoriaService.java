@@ -8,7 +8,7 @@ import com.lubriweb.pe.model.Categoria;
 
 public interface CategoriaService {
 
-	
+	//Abstractos
 	public List<Categoria>findAll();
 	public Categoria getFindById(Integer id);
 	public Categoria save(Categoria categoria);

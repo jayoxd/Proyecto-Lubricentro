@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AdminLTE 3 | Top Navigation</title>
+<title>LubriCenter | Online </title>
 
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet"
@@ -11,8 +12,8 @@
 <!-- Theme style -->
 <link rel="stylesheet" href="css/adminlte.min.css">
 
-  <!-- Custom styles for this template -->
-  <link th:href="@{/css/custom-features-user.css}" rel="stylesheet">
+ <!-- Custom styles for this template -->
+<link th:href="@{/css/custom-features.css}" rel="stylesheet">
 
 </head>
 <body class="layout-top-nav" style="height: auto;">
@@ -23,7 +24,7 @@
 			class="main-header navbar navbar-expand-md navbar-light navbar-white">
 			<div class="container">
 				<a href="../../index3.html" class="navbar-brand"> <img
-					src="imgs/AdminLTELogo.png" alt="AdminLTE Logo"
+					src="imgs/oil-car.png" alt="AdminLTE Logo"
 					class="brand-image img-circle elevation-3" style="opacity: .8">
 					<span class="brand-text font-weight-light">LubriCenter</span>
 				</a>
@@ -59,16 +60,16 @@
 									data-toggle="dropdown" aria-haspopup="true"
 									aria-expanded="false" class="dropdown-item dropdown-toggle">Hover
 										for action</a>
-									<ul aria-labelledby="dropdownSubMenu2"
-										class="dropdown-menu border-0 shadow">
-										<li><a tabindex="-1" href="#" class="dropdown-item">level
+									  <ul aria-labelledby="dropdownSubMenu2"
+										  class="dropdown-menu border-0 shadow">
+										  <li><a tabindex="-1" href="#" class="dropdown-item">level
 												2</a></li>
 
-										<!-- Level three dropdown-->
-										<li class="dropdown-submenu"><a id="dropdownSubMenu3"
-											href="#" role="button" data-toggle="dropdown"
-											aria-haspopup="true" aria-expanded="false"
-											class="dropdown-item dropdown-toggle">level 2</a>
+										 <!-- Level three dropdown-->
+										  <li class="dropdown-submenu"><a id="dropdownSubMenu3"
+											  href="#" role="button" data-toggle="dropdown"
+											  aria-haspopup="true" aria-expanded="false"
+											  class="dropdown-item dropdown-toggle">level 2</a>
 											<ul aria-labelledby="dropdownSubMenu3"
 												class="dropdown-menu border-0 shadow">
 												<li><a href="#" class="dropdown-item">3rd level</a></li>
@@ -78,16 +79,18 @@
 
 										<li><a href="#" class="dropdown-item">level 2</a></li>
 										<li><a href="#" class="dropdown-item">level 2</a></li>
-									</ul></li>
+									   </ul>
+								</li>
 								<!-- End Level two -->
-							</ul></li>
+							</ul>
+						</li>
 					</ul>
 
 					<!-- SEARCH FORM -->
-					<form class="form-inline ml-0 ml-md-3">
+					<form class="form-inline ml-0 ml-md-3" th:action="${Search}" method="post">
 						<div class="input-group input-group-sm">
 							<input class="form-control form-control-navbar" type="search"
-								placeholder="Search" aria-label="Search">
+								placeholder="Search" name="buscar" aria-label="Search">
 							<div class="input-group-append">
 								<button class="btn btn-navbar" type="submit">
 									<i class="fas fa-search"></i>
@@ -95,35 +98,13 @@
 							</div>
 						</div>
 					</form>
+					
+					
 				</div>
 
 				<!-- Right navbar links -->
 				<ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
-					<!-- Messages Dropdown Menu -->
-					<li class="nav-item dropdown"><a class="nav-link"
-						data-toggle="dropdown" href="#"> <i class="fas fa-comments"></i>
-							<span class="badge badge-danger navbar-badge">3</span>
-					</a>
-						<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-							<a href="#" class="dropdown-item"> <!-- Message Start -->
-								<div class="media">
-									<img src="../../dist/img/user1-128x128.jpg" alt="User Avatar"
-										class="img-size-50 mr-3 img-circle">
-									<div class="media-body">
-										<h3 class="dropdown-item-title">
-											Brad Diesel <span class="float-right text-sm text-danger"><i
-												class="fas fa-star"></i></span>
-										</h3>
-										<p class="text-sm">Call me whenever you can...</p>
-										<p class="text-sm text-muted">
-											<i class="far fa-clock mr-1"></i> 4 Hours Ago
-										</p>
-									</div>
-								</div> <!-- Message End -->
-							</a>
-							<div class="dropdown-divider"></div>
-
-						</div></li>
+					
 					<!-- Notifications Dropdown Menu -->
 					<li class="nav-item dropdown"><a class="nav-link"
 						data-toggle="dropdown" href="#"> <i class="far fa-bell"></i> <span
@@ -149,13 +130,41 @@
 							<div class="dropdown-divider"></div>
 							<a href="#" class="dropdown-item dropdown-footer">See All
 								Notifications</a>
-						</div></li>
+						</div>
+					</li>
+					<!-- Messages Dropdown Menu -->
+					<li class="nav-item dropdown">
+					  <a class="nav-link"
+						data-toggle="dropdown" href="#"> <i class="fas fa-address-book"></i>
+							<span class="badge badge-danger navbar-badge">1</span>
+				     </a>
+						<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+							<a href="#" class="dropdown-item"> <!-- Message Start -->
+								<div class="media">
+									<img src="imgs/sexy-girl.jpg" alt="User Avatar"
+										class="img-size-50 mr-3 img-circle">
+									<div class="media-body">
+										<h3 class="dropdown-item-title">
+											USER CLIENTE <span class="float-right text-sm text-danger"><i
+												class="fas fa-star"></i></span>
+										</h3>
+										<p class="text-sm">Elige lo que tienes en mente...</p>
+										
+									</div>
+								</div> <!-- Message End -->
+							</a>
+							
+							<a class="nav-link" th:href="@{/logout}"
+						       role="button"> <i class="fas fa-chevron-circle-left"></i>
+						       CERRAR SESION
+					        </a>
+							
+							<div class="dropdown-divider"></div>
 
+						</div>
+					</li>
 
-					<li class="nav-item"><a class="nav-link"
-						data-widget="control-sidebar" data-slide="true" href="#"
-						role="button"> <i class="fas fa-th-large"></i>
-					</a></li>
+       
 				</ul>
 			</div>
 		</nav>
@@ -168,14 +177,14 @@
 				<div class="container">
 					<div class="row mb-2">
 						<div class="col-sm-6">
-							<h1 id="ColorTitle" class="m-0">Productos</h1>
+							<h1 id="ColorTitle" class="m-0">Productos Online</h1>
 						</div>
 						<!-- /.col -->
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
-								<li class="breadcrumb-item"><a href="#">Marcas</a></li>
-								<li class="breadcrumb-item"><a href="#">Categorias</a></li>
-								<li class="breadcrumb-item active">Otros</li>
+								<li id="ColorTitle" class="breadcrumb-item"><a>Marcas</a></li>
+								<li id="ColorTitle" class="breadcrumb-item"><a href="#">Categorias</a></li>
+								<li id="ColorTitle" class="breadcrumb-item active"><a href="#">Otros</a></li>
 							</ol>
 						</div>
 						<!-- /.col -->
@@ -195,7 +204,8 @@
 					<div class="card card-solid">
 						<div class="card-body pb-0">
 							<div class="row">
-							
+			
+			<!-- ----------------------------------------------------------  FOR -------------------------  -->				
 								<div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column" 
 								      th:each="producto: ${lstprodcargados}">
 								      
@@ -232,6 +242,7 @@
 									</div>
 								</div>
 								
+		<!-- ----------------------------------------------------------  FOR -------------------------  -->								
 							</div>
 						</div>
 						<!-- /.card-body -->

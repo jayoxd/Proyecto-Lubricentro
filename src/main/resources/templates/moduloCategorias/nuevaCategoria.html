@@ -3,114 +3,127 @@
 
 <head>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
 
-  <title>Spring LubriCenter</title>
+<title>NUEVA CATEGORIA</title>
 
 
-  <!-- Bootstrap core CSS -->
-   <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<!-- Google Font: Source Sans Pro -->
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
 
-  <!-- Custom styles for this template -->
-  <link th:href="@{/css/custom-features2.css}" rel="stylesheet">
+<!-- Theme style -->
+<link rel="stylesheet" href="css/adminlte.min.css">
+
+
+<!-- Bootstrap core CSS -->
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link th:href="@{/css/custom-features2.css}" rel="stylesheet">
 
 </head>
 
 <body>
 
-  <!-- Navigation -->
-   <div th:include="fragments/fragment_admin.html::header"></div>
+	<!-- Navigation -->
+	<div th:include="fragments/fragment_admin.html::header"></div>
 
-		<!-- Page Content -->
-		<div class="container">
-
-
-		  <!-- Page Heading/Breadcrumbs -->
+	<!-- 
+   <div class="container">
+   
+    Page Heading/Breadcrumbs
 		  <h1 class="mt-4 mb-3">
 			Spring LubriCenter 
 		  </h1>
 
 		  <ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-			<li class="breadcrumb-item active">Crear Categorias</li>
 		  </ol>
+   </div> -->
 
-          <div>
-          <h1 th:if="${categoria.idCategoria == null}">Crear Categoria</h1>
-          <h1 th:unless="${categoria.idCategoria == null}">Editar Categoria</h1>
-          </div>
-		  
-		  <form class="form-horizontal" th:action="@{/categorias/save}" th:object="${categoria}" 
-		       method="post" enctype="multipart/form-data">
-		       
-		       <input type="hidden" th:field="*{idCategoria}" th:value="${categoria.idCategoria}">
-		       
-		       
-			<div class="form-group">
-			  <label class="control-label col-sm-2" for="nombre">Nombre:</label>
-			  <div class="col-sm-10">
-				<input type="text" th:field="*{nombre}" class="form-control" id="nombre" name="nombre"
-				placeholder="Nombre Categoria" autocomplete="off" required>
-			  </div>
+
+	<!-- Page Content -->
+	<div class="container p-4 mr-10">
+
+		<div class="card card-primary p-2">
+
+			<!--card-header start -->
+			<div class="card-header">
+				<h1 class="card-title" th:if="${categoria.idCategoria == null}">Crear
+					Categoria</h1>
+				<h1 class="card-title" th:unless="${categoria.idCategoria == null}">Editar
+					Categoria</h1>
 			</div>
-			<div class="form-group">
-			  <label class="control-label col-sm-2" for="descripcion">Descripción:</label>
-			  <div class="col-sm-10">
-				<textarea class="form-control" id="descripcion" name="descripcion"
+			<!-- /.card-header -->
+
+			<!-- form start -->
+			<form th:action="@{/categorias/save}" th:object="${categoria}"
+				method="post" enctype="multipart/form-data">
+
+				<input type="hidden" th:field="*{idCategoria}"
+					th:value="${categoria.idCategoria}">
+
+				<div class="card-body">
+
+
+					<div class="form-group col-6">
+						<label for="exampleInputEmail1">Nombre:</label> <input type="text"
+							th:field="*{nombre}" class="form-control" id="nombre"
+							name="nombre" placeholder="Nombre Categoria" required>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="descripcion">Descripción:</label>
+						<div class="col-sm-10">
+							<textarea class="form-control" id="descripcion"
+								name="descripcion"
+								placeholder="Ingrese la descripcion del producto" required
+								autocomplete="off">
 				
-				placeholder="Ingrese la descripcion del producto" required
-				autocomplete="off">
-				
-				 </textarea>
-			  </div>
-			</div>
-			
-			<div class="form-group row">
-			
-			  <label class = "col-form-label col-sm-3">Selecione una o más Marcas: </label>
-			  
-			  <div class= "col-sm-4">
-			  
-			    <select th:field="*{marcas}" class="form-control" multiple="multiple" required>
-			    
-			    <th:block th:each= "marca : ${lstMarcas}">
-			    
-			    <option th:text= "${marca.nombre}" th:value="${marca.idMarca}"></option>
-			    
-			    </th:block>
-			    
-			    
-			    </select>
-			  
-			  </div>
-			
-			
-			</div>
-			
-			
-			
+				             </textarea>
+						</div>
+					</div>
 
-			<div class="row">
-			  <div class="col-sm-2">
-				<button type="submit" class="btn btn-success">
-				  <span class="glyphicon glyphicon-saved"></span> Guardar
-				</button>
-			  </div>
-			</div>
 
-		  </form>
 
+				</div>
+				<!-- /.card-body -->
+
+				<div class="card-footer">
+
+					<div class="row">
+						<div class="col-sm-2">
+							<button type="submit" class="btn btn-success">
+								<span class="glyphicon glyphicon-saved"></span> Guardar
+							</button>
+						</div>
+					</div>
+				</div>
+
+			</form>
 		</div>
-		<!-- /.container -->
+
+	</div>
+	<!-- /.container -->
 
 
- <!-- Bootstrap core JavaScript -->
-    <script th:src="@{/js/jquery.min.js}"></script>
-    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+	<!-- REQUIRED SCRIPTS -->
 
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- Bootstrap 4 -->
+	<script src="js/bootstrap.bundle.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="js/adminlte.min.js"></script>
+	<!-- AdminLTE for demo purposes -->
+	<script src="js/demo.js"></script>
+	<!-- Font Awesome -->
+	<script src="js/fontawesome.all.min.js"></script>
 </body>
 
 </html>

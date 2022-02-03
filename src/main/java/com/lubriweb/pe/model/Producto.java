@@ -41,14 +41,14 @@ public class Producto implements Serializable {
 	private Marca marcas;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "producto", fetch = FetchType.LAZY)
-	private List<DetalleOrden> detalles;
+	private List<Carrito> detalles;
 
 	public Producto() {
 
 	}
 
 	public Producto(Integer idProducto, String nombre, String descripcion, String imagen, double precio, int cantidad,
-			Marca marcas, List<DetalleOrden> detalles) {
+			Marca marcas, List<Carrito> detalles) {
 
 		this.idProducto = idProducto;
 		this.nombre = nombre;
@@ -61,7 +61,7 @@ public class Producto implements Serializable {
 	}
 
 	public Producto(String nombre, String descripcion, String imagen, double precio, int cantidad, Marca marcas,
-			List<DetalleOrden> detalles) {
+			List<Carrito> detalles) {
 
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -134,11 +134,11 @@ public class Producto implements Serializable {
 		this.marcas = marcas;
 	}
 
-	public List<DetalleOrden> getDetalles() {
+	public List<Carrito> getDetalles() {
 		return detalles;
 	}
 
-	public void setDetalles(List<DetalleOrden> detalles) {
+	public void setDetalles(List<Carrito> detalles) {
 		this.detalles = detalles;
 	}
 

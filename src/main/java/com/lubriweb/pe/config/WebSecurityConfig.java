@@ -55,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().and()
 		      .formLogin()
 		      .loginPage("/login")
-		      .successHandler(csh); 
+		      .successHandler(csh);  
 		
 		//Intercepta solicitudes sin permiso por su rol
 		//Se va rediriguir a la URL http:localhost:8085/LubriCenter/access_denied

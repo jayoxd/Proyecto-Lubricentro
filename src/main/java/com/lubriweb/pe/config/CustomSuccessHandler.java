@@ -21,14 +21,14 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 	// Objeto redireccionador
 	private RedirectStrategy rs = new DefaultRedirectStrategy();
 
-	@Override // Metodo que controla el exito de logueo para ir a una URL especifico
+	@Override // Metodo que controla el exito de logueo para ir a una URL especifica
 	protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException, ServletException {
 		
 		String targetURL = determineTargetUrl(authentication);
 		
 		
-		// Redireccionar manualmente la url (http://localhost:8085/LubriCenter/dba)
+		// Redireccionar manualmente la url (http://localhost:8085/admin)
 		rs.sendRedirect(request, response, targetURL);
 
 	}

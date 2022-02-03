@@ -3,36 +3,37 @@
 
 <head>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
 
-  <title>Spring LubriCenter</title>
-  
-  
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet"
+<title>NUEVO PRODUCTO</title>
+
+
+<!-- Google Font: Source Sans Pro -->
+<link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
 
-   <!-- Theme style -->
-  <link rel="stylesheet" href="css/adminlte.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="css/adminlte.min.css">
 
 
-  <!-- Bootstrap core CSS -->
-   <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<!-- Bootstrap core CSS -->
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 
-  <!-- Custom styles for this template -->
-  <link th:href="@{/css/custom-features2.css}" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link th:href="@{/css/custom-features2.css}" rel="stylesheet">
 
 </head>
 
 <body>
 
-  <!-- Navigation -->
-   <div th:include="fragments/fragment_admin.html::header"></div>
-   
-   <!-- 
+	<!-- Navigation -->
+	<div th:include="fragments/fragment_admin.html::header"></div>
+
+	<!-- 
    <div class="container">
    
     Page Heading/Breadcrumbs
@@ -44,111 +45,154 @@
 			<li class="breadcrumb-item"><a href="index.html">Home</a></li>
 		  </ol>
    </div> -->
-   
 
-		<!-- Page Content -->
-		<div class="container p-4 mr-10">
 
-          <div class="card card-primary p-2">
-          
-             <!--card-header start -->
-              <div class="card-header">
-                 <h1 class="card-title" th:if="${producto.idProducto == null}">Crear Producto</h1>
-                 <h1 class="card-title" th:unless="${producto.idProducto == null}">Editar Producto</h1>
-               </div>
-              <!-- /.card-header -->
-                
-               <!-- form start -->
-              <form th:action="@{/productos/save}" th:object="${producto}" 
-		             method="post" enctype="multipart/form-data">
-		             
-		           <input type="hidden" th:field="*{idProducto}" th:value="${producto.idProducto}"> 
-		             
-                <div class="card-body">
-             
-                 
-                  <div class="form-group col-6">
-                    <label for="exampleInputEmail1">Nombre:</label>
-                    <input type="text" th:field="*{nombre}" class="form-control" id="nombre" name="nombre"
-                     placeholder="Nombre Producto" required>
-                  </div>
-                  
-                  <div class="col-sm-6">
-                      <!-- textarea -->
-                      <div class="form-group">
-                        <label>Descripcion</label>
-                        <textarea class="form-control" rows="3" id="descripcion" name="descripcion"
-						placeholder="Ingrese la descripcion del producto" required>
+	<!-- Page Content -->
+	<div class="container mt-4 mb-4">
+
+		<div class="card card-primary p-2">
+
+			<!--card-header start -->
+			<div class="card-header">
+				<h1 class="card-title" th:if="${producto.idProducto == null}">Crear
+					Producto</h1>
+				<h1 class="card-title" th:unless="${producto.idProducto == null}">Editar
+					Producto</h1>
+			</div>
+			<!-- /.card-header -->
+
+			<!-- form start -->
+			<div class="container">
+
+				<form th:action="@{/productos/save}" th:object="${producto}"
+					method="post" enctype="multipart/form-data">
+
+					<input type="hidden" th:field="*{idProducto}"
+						th:value="${producto.idProducto}">
+
+					<div class="card-body">
+
+						<div class="row">
+
+							<div class="col">
+
+								<label for="exampleInputEmail1">Nombre:</label> <input
+									type="text" th:field="*{nombre}" class="form-control"
+									id="nombre" name="nombre" placeholder="Nombre Producto"
+									required>
+
+
+							</div>
+
+							<div class="col">
+
+
+								<!-- textarea -->
+								<div class="form-group">
+									<label>Descripcion</label>
+									<textarea class="form-control" rows="3" id="descripcion"
+										name="descripcion"
+										placeholder="Ingrese la descripcion del producto" required>
 						
-						</textarea>
-                      </div>
-                  </div>
-                  
-                  
-                   <div class="form-group">
-                        <label class="control-label col-sm-2" for="img">Imagen:</label>
-                        <div class="col-sm-10">
-                        <input type="file" class="form-control-file" id="img" name="img">
-                        </div>
-                  </div>
-           
-             
-                   <div class="form-group col-6">
-                    <label for="exampleInputEmail1">Precio:</label>
-                    <input type="text" th:field="*{precio}" class="form-control" id="precio" name="precio"
-                     placeholder="Precio" required>
-                  </div>
-                  
-                  <div class="form-group col-6">
-                    <label for="exampleInputEmail1">Cantidad:</label>
-                    <input type="text" th:field="*{cantidad}" class="form-control" id="cantidad" name="cantidad"
-                     placeholder="Cantidad" required>
-                  </div>
-                  
-                 <div class="form-group row col-6">
-			
-			    <label class = "col-form-label col-sm-3">Selecione una Marca : </label>
-			  
-			        <div class= "col-sm-4">
-			  
-			        <select th:field="*{marcas}"
-			                class="custom-select form-control-border border-width-2"
-			                id="exampleSelectBorderWidth2" required>
-					
-                           <th:block th:each= "marca : ${lstMarcas}">
-			    
-			                  <option th:text= "${marca.nombre}" th:value="${marca.idMarca}"></option>
-			    
-			               </th:block>
-                    
-                   </select>
-			  
-			       </div>
-			      </div>
-			      
-               
-              </div> 
-                <!-- /.card-body -->
+						            </textarea>
+								</div>
 
-                 <div class="card-footer">
-                
-                  <div class="row">
-			         <div class="col-sm-2">
-				     <button type="submit" class="btn btn-success">
-				     <span class="glyphicon glyphicon-saved"></span> Guardar
-				     </button>
-			         </div>
-			      </div>
-                 </div>
-                
-             </form>
-        </div>
-		  
+
+							</div>
+
+
+
+						</div>
+
+
+
+						<div class="row">
+
+							<div class="col">
+								<div class="form-group col-sm-4">
+									<label for="exampleInputEmail1">Precio:</label> <input
+										type="text" th:field="*{precio}" class="form-control"
+										id="precio" name="precio" placeholder="Precio" required>
+								</div>
+
+							</div>
+
+							<div class="col">
+								<div class="form-group col-sm-4">
+									<label for="exampleInputEmail1">Cantidad:</label> <input
+										type="text" th:field="*{cantidad}" class="form-control"
+										id="cantidad" name="cantidad" placeholder="Cantidad" required>
+								</div>
+
+							</div>
+
+
+						</div>
+
+
+						<div class="row">
+							<div class="col">
+
+
+								<label class="control-label" for="img">Imagen:</label>
+								<div class="col-sm-10">
+									<input type="file" class="form-control-file" id="img"
+										name="img">
+								</div>
+
+
+							</div>
+
+							<div class="col">
+
+
+								<label class="col-form-label">Selecione una Marca : </label>
+
+								<div class="col-sm-6">
+
+									<select th:field="*{marcas}"
+										class="custom-select form-control-border border-width-2"
+										id="exampleSelectBorderWidth2" required>
+
+										<th:block th:each="marca : ${lstMarcas}">
+
+											<option th:text="${marca.nombre}" th:value="${marca.idMarca}"></option>
+
+										</th:block>
+
+									</select>
+
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+					</div>
+					<!-- /.card-body -->
+
+					<div class="card-footer">
+
+						<div class="row">
+							<div class="col-sm-2">
+								<button type="submit" class="btn btn-success">
+									<span class="glyphicon glyphicon-saved"></span> Guardar
+								</button>
+							</div>
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+
 	</div>
 	<!-- /.container -->
-		
 
-<!-- REQUIRED SCRIPTS -->
+
+	<!-- REQUIRED SCRIPTS -->
 
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>

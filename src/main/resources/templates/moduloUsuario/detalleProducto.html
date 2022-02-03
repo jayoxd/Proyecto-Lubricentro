@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AdminLTE 3 | Top Navigation</title>
+<title>LubriCenter | Online</title>
 
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet"
@@ -11,8 +12,8 @@
 <!-- Theme style -->
 <link rel="stylesheet" th:href="@{/css/adminlte.min.css}">
 
-<!-- Custom styles for this template -->
-<link th:href="@{/css/custom-features-user.css}" rel="stylesheet">
+ <!-- Custom styles for this template -->
+<link th:href="@{/css/custom-features.css}" rel="stylesheet">
 
 </head>
 <body class="layout-top-nav" style="height: auto;">
@@ -23,9 +24,9 @@
 		<nav
 			class="main-header navbar navbar-expand-md navbar-light navbar-white">
 			<div class="container">
-				<a href="#" class="navbar-brand"> <img
-					src="imgs/oil-icon.jpg" alt="AdminLTE Logo"
-					class="brand-image img-circle elevation-3" style="opacity: .8">
+				<a href="../../index3.html" class="navbar-brand"> 
+				<img src="imgs/oil-car.png" alt="AdminLTE Logo"
+					 class="brand-image img-circle elevation-3" style="opacity: .8">
 					<span class="brand-text font-weight-light">LubriCenter</span>
 				</a>
 
@@ -162,7 +163,7 @@
 		</nav>
 		<!-- /.navbar -->
 
-		<div class="container">
+		<div class="container p-4">
 
 			<!-- Content Wrapper. Contains page content -->
 			<div class="content-wrapper" style="min-height: 2646.44px;">
@@ -175,7 +176,7 @@
 							</div>
 							<div class="col-sm-6">
 								<ol class="breadcrumb float-sm-right">
-									<li class="breadcrumb-item"><a href="#">Home</a></li>
+									<li class="breadcrumb-item"><a th:href="@{/user}">Home</a></li>
 									<li class="breadcrumb-item active">E-commerce</li>
 								</ol>
 							</div>
@@ -189,6 +190,10 @@
 
 					<!-- Default box -->
 					<div class="card card-solid">
+					
+					  <form th:action = "@{/cart}" method="POST">
+					       <input type="hidden" th:value="${detproducto.idProducto}" name="id">
+					  
 						<div class="card-body">
 							<div class="row">
 								<div class="col-12 col-sm-6">
@@ -288,13 +293,15 @@
 									</div>
 
 									<div class="mt-4">
-										<div class="btn btn-primary btn-lg btn-flat">
-											<i class="fas fa-cart-plus fa-lg mr-2"></i> Add to Cart
-										</div>
+										<button class="btn btn-primary btn-lg btn-flat">
+											<i class="fas fa-cart-plus fa-lg mr-2"></i>
+											 Add to Cart
+											 
+										</button>
 
-										<div class="btn btn-default btn-lg btn-flat">
+										<!-- <div class="btn btn-default btn-lg btn-flat">
 											<i class="fas fa-heart fa-lg mr-2"></i> Add to Wishlist
-										</div>
+										</div> -->
 									</div>
 
 									<div class="mt-4 product-share">
@@ -314,8 +321,10 @@
 
 						</div>
 						<!-- /.card-body -->
+				 </form>		
 					</div>
 					<!-- /.card -->
+			     		
 
 				</section>
 				<!-- /.content -->
@@ -336,6 +345,7 @@
 	<script th:src="@{/js/adminlte.min.js}"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script th:src="@{/js/demo.js}"></script>
+	
 	<!-- Font Awesome -->
 	<script th:src="@{/js/fontawesome.all.min.js}"></script>
 

@@ -13,7 +13,6 @@ import com.lubriweb.pe.repository.ProductoRepository;
 public class ProductoServiceImpl implements ProductoService {
 
 	@Autowired
-
 	private ProductoRepository productoRepository;
 
 	@Override

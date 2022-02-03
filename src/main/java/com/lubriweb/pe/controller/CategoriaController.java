@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lubriweb.pe.model.Categoria;
-import com.lubriweb.pe.model.Marca;
 import com.lubriweb.pe.service.CategoriaService;
-import com.lubriweb.pe.service.MarcaService;
+
 
 @Controller
 @RequestMapping("/categorias")
@@ -21,9 +20,6 @@ public class CategoriaController {
 
 	@Autowired
 	private CategoriaService catsrvc;
-
-	@Autowired
-	private MarcaService marcasrvc;
 
 	@GetMapping("")
 	public String listartodo(Model model) {
@@ -38,10 +34,9 @@ public class CategoriaController {
 	@GetMapping("/create")
 	public String nuevaCategoria(Model model) {
 
-		List<Marca> lstMarcas = marcasrvc.findAll();
+		Categoria categoria = new Categoria();
 
-		model.addAttribute("lstMarcas", lstMarcas);
-		model.addAttribute("categoria", new Categoria());
+		model.addAttribute("categoria", categoria);
 
 		return "moduloCategorias/nuevaCategoria";
 	}
@@ -57,11 +52,8 @@ public class CategoriaController {
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable("id") Integer id, Model model) {
 
-		List<Marca> lstMarcas = marcasrvc.findAll();
-
 		Categoria categoria = catsrvc.getFindById(id);
 
-		model.addAttribute("lstMarcas", lstMarcas);
 		model.addAttribute("categoria", categoria);
 
 		return "moduloCategorias/nuevaCategoria";

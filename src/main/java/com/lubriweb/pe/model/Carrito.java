@@ -10,86 +10,105 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "carrito")
-public class Carrito implements Serializable{
-	
-	
+public class Carrito implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idCarrito;
-	
 	@Column
-	private int cantidad;
-	
-	//Muchos productos pueden ser agregados al carrito 
+	private String nombre;
+	@Column(length = 45, nullable = false, unique = true)
+	private double cantidad;
+	@Column
+	private double precio;
+	@Column
+	private double total;
+
+	// Muchos Detalles un Producto <-> un Producto Muchos Detalles (Relacion U - M )
 	@JoinColumn(name = "IdProducto", referencedColumnName = "idProducto")
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	private Producto producto;
-	
-	//Un usuario puede agregar muchos productos al carrito
-	@JoinColumn(name = "IdUsuario", referencedColumnName = "idUsuario")
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	private Usuario usuario;
-	
-	
+
+	@OneToOne
+	private Orden orden;
+
 	public Carrito() {
-		
+
 	}
 
-
-	public Carrito(Integer idCarrito, int cantidad, Producto producto, Usuario usuario) {
+	public Carrito(Integer idCarrito, String nombre, double cantidad, double precio, double total, Producto producto,
+			Orden orden) {
 		
 		this.idCarrito = idCarrito;
+		this.nombre = nombre;
 		this.cantidad = cantidad;
+		this.precio = precio;
+		this.total = total;
 		this.producto = producto;
-		this.usuario = usuario;
+		this.orden = orden;
 	}
-
 
 	public Integer getIdCarrito() {
 		return idCarrito;
 	}
 
-
 	public void setIdCarrito(Integer idCarrito) {
 		this.idCarrito = idCarrito;
 	}
 
+	public String getNombre() {
+		return nombre;
+	}
 
-	public int getCantidad() {
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public double getCantidad() {
 		return cantidad;
 	}
 
-
-	public void setCantidad(int cantidad) {
+	public void setCantidad(double cantidad) {
 		this.cantidad = cantidad;
 	}
 
+	public double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
+
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
 
 	public Producto getProducto() {
 		return producto;
 	}
 
-
 	public void setProducto(Producto producto) {
 		this.producto = producto;
 	}
 
-
-	public Usuario getUsuario() {
-		return usuario;
+	public Orden getOrden() {
+		return orden;
 	}
 
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setOrden(Orden orden) {
+		this.orden = orden;
 	}
-	
-	
 
 }

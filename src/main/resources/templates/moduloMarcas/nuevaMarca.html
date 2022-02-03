@@ -8,7 +8,15 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Spring LubriCenter</title>
+  <title>NUEVA MARCA</title>
+  
+  
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
+
+   <!-- Theme style -->
+  <link rel="stylesheet" href="css/adminlte.min.css">
 
 
   <!-- Bootstrap core CSS -->
@@ -23,90 +31,110 @@
 
   <!-- Navigation -->
    <div th:include="fragments/fragment_admin.html::header"></div>
-
-		<!-- Page Content -->
-		<div class="container">
-
-
-		  <!-- Page Heading/Breadcrumbs -->
+   
+   <!-- 
+   <div class="container">
+   
+    Page Heading/Breadcrumbs
 		  <h1 class="mt-4 mb-3">
 			Spring LubriCenter 
 		  </h1>
 
 		  <ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-			<li class="breadcrumb-item active">Crear Marca</li>
 		  </ol>
+   </div> -->
+   
 
-           <div class="card-header">
+		<!-- Page Content -->
+		<div class="container p-4 mr-10">
+
+          <div class="card card-primary p-2">
+          
+             <!--card-header start -->
+              <div class="card-header">
                  <h1 class="card-title" th:if="${marca.idMarca == null}">Crear Marca</h1>
                  <h1 class="card-title" th:unless="${marca.idMarca == null}">Editar Marca</h1>
                </div>
+              <!-- /.card-header -->
+                
+               <!-- form start -->
+              <form th:action="@{/marcas/save}" th:object="${marca}" 
+		             method="post" enctype="multipart/form-data">
+		             
+		           <input type="hidden" th:field="*{idMarca}" th:value="${marca.idMarca}"> 
+		             
+                <div class="card-body">
+             
+                 
+                  <div class="form-group col-6">
+                    <label for="exampleInputEmail1">Nombre:</label>
+                    <input type="text" th:field="*{nombre}" class="form-control" id="nombre" name="nombre"
+                     placeholder="Nombre Marca" required>
+                  </div>
+                  
+                
+                   <div class="form-group col-6">
+                    <label for="exampleInputEmail1">Proveedor:</label>
+                    <input type="text" th:field="*{proveedor}" class="form-control" id="precio" name="precio"
+                     placeholder="Proveedor" required>
+                  </div>
+                  
+                 <div class="form-group row col-6">
+			
+			    <label class = "col-form-label col-sm-3">Selecione una Categoria : </label>
+			  
+			        <div class= "col-sm-4">
+			  
+			        <select th:field="*{categoria}"
+			                class="custom-select form-control-border border-width-2"
+			                id="exampleSelectBorderWidth2" required>
+					
+                           <th:block th:each= "categoria : ${lstCategoria}">
+			    
+			                  <option th:text= "${categoria.nombre}" th:value="${categoria.idCategoria}"></option>
+			    
+			               </th:block>
+                    
+                   </select>
+			  
+			       </div>
+			      </div>
+			      
+               
+              </div> 
+                <!-- /.card-body -->
+
+                 <div class="card-footer">
+                
+                  <div class="row">
+			         <div class="col-sm-2">
+				     <button type="submit" class="btn btn-success">
+				     <span class="glyphicon glyphicon-saved"></span> Guardar
+				     </button>
+			         </div>
+			      </div>
+                 </div>
+                
+             </form>
+        </div>
 		  
-		  <form class="form-horizontal" th:action="@{/marcas/save}" th:object="${marca}" 
-		       method="post" enctype="multipart/form-data">
-		       
-		      <input type="hidden" th:field="*{idMarca}" th:value="${marca.idMarca}"> 
-		       
-		       
-			<div class="form-group">
-			  <label class="control-label col-sm-2" for="nombre">Nombre:</label>
-			  <div class="col-sm-10">
-				<input type="text" th:field="*{nombre}" class="form-control" id="nombre" name="nombre"
-				placeholder="Nombre Categoria" autocomplete="off" required>
-			  </div>
-			</div>
-			
-			<div class="form-group">
-			  <label class="control-label col-sm-2" for="nombre">Proveedor:</label>
-			  <div class="col-sm-10">
-				<input type="text" th:field="*{proveedor}" class="form-control" id="nombre" name="nombre"
-				placeholder="Nombre Proveedor" autocomplete="off" required>
-			  </div>
-			</div>
-			
-			<div class="form-group row">
-			
-			  <label class = "col-form-label col-sm-3">Selecione una Categoria: </label>
-			  
-			  <div class= "col-sm-4">
-			  
-			    <select th:field="*{categoria}" class="form-control"  required>
-			    
-			    <th:block th:each= "categoria : ${lstCategoria}">
-			    
-			    <option th:text= "${categoria.nombre}" th:value="${categoria.idCategoria}"></option>
-			    
-			    </th:block>
-			    
-			    
-			    </select>
-			  
-			  </div>
-			
-			
-			</div>
-			
-			
+	</div>
+	<!-- /.container -->
+		
 
-			<div class="row">
-			  <div class="col-sm-2">
-				<button type="submit" class="btn btn-success">
-				  <span class="glyphicon glyphicon-saved"></span> Guardar
-				</button>
-			  </div>
-			</div>
+<!-- REQUIRED SCRIPTS -->
 
-		  </form>
-
-		</div>
-		<!-- /.container -->
-
-
- <!-- Bootstrap core JavaScript -->
-    <script th:src="@{/js/jquery.min.js}"></script>
-    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- Bootstrap 4 -->
+	<script src="js/bootstrap.bundle.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="js/adminlte.min.js"></script>
+	<!-- AdminLTE for demo purposes -->
+	<script src="js/demo.js"></script>
+	<!-- Font Awesome -->
+	<script src="js/fontawesome.all.min.js"></script>
 </body>
 
 </html>
